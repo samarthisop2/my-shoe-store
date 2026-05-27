@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOLE DISTRICT — Premium Sneakers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --cream: #f0ede6;
+    --accent: #e84c1e;
+    --accent2: #1a1aff;
+    --gold: #c9a84c;
+    --gray: #888;
+    --light: #e8e5de;
+    --card-bg: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--black);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(10,10,10,0.96);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%;
+    height: 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--white);
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: rgba(245,243,238,0.7);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .cart-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 2px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .cart-btn:hover { background: #c73e14; }
+  .cart-count {
+    background: var(--accent); color: white;
+    border-radius: 50%; width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem; font-weight: 700;
+    position: absolute; top: -6px; right: -6px;
+  }
+  .cart-wrap { position: relative; }
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+  .hamburger span { width: 24px; height: 2px; background: white; display: block; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--black);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(232,76,30,0.15) 0%, transparent 70%);
+    top: 20%; left: 20%;
+    pointer-events: none;
+  }
+  .hero-text {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 5% 8%;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(232,76,30,0.15);
+    border: 1px solid rgba(232,76,30,0.4);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 2px;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    width: fit-content;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 8rem);
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: -1px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero p {
+    color: rgba(245,243,238,0.55);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #c73e14; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid rgba(245,243,238,0.3);
+    padding: 1rem 2.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.05); }
+  .hero-image {
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-shoe-img {
+    width: 85%;
+    max-width: 500px;
+    object-fit: contain;
+    filter: drop-shadow(0 30px 60px rgba(232,76,30,0.3));
+    animation: float 4s ease-in-out infinite;
+  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-18px); } }
+  .hero-stats {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .stat {
+    padding: 1.5rem 2rem;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    text-align: center;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    letter-spacing: 1px;
+  }
+  .stat-label { color: var(--gray); font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; }
+
+  /* BRANDS */
+  .brands-strip {
+    background: var(--light);
+    padding: 1.5rem 5%;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    overflow-x: auto;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .brands-strip::-webkit-scrollbar { display: none; }
+  .brand-pill {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    color: rgba(10,10,10,0.35);
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 6px 16px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+  }
+  .brand-pill:hover, .brand-pill.active {
+    color: var(--black);
+    border-color: rgba(10,10,10,0.2);
+    background: white;
+  }
+  .strip-label {
+    font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray); white-space: nowrap;
+  }
+
+  /* SECTION */
+  section { padding: 5rem 5%; }
+  .section-head {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .section-tag {
+    font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+  .view-all {
+    font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 2px;
+    cursor: pointer;
+    background: none; border-left: none; border-right: none; border-top: none;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    transition: opacity 0.2s;
+  }
+  .view-all:hover { opacity: 0.7; }
+
+  /* PRODUCT GRID */
+  .filters {
+    display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 2.5rem;
+  }
+  .filter-btn {
+    padding: 0.45rem 1.2rem;
+    border: 1px solid rgba(10,10,10,0.2);
+    background: transparent;
+    color: var(--black);
+    border-radius: 2px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--black);
+    color: var(--white);
+    border-color: var(--black);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .product-card {
+    background: var(--card-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(10,10,10,0.07);
+    transition: all 0.3s;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    border-color: transparent;
+  }
+  .product-img-wrap {
+    background: var(--cream);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .product-img {
+    width: 100%; height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s;
+  }
+  .product-card:hover .product-img { transform: scale(1.06) rotate(-2deg); }
+  .product-badge {
+    position: absolute; top: 14px; left: 14px;
+    padding: 4px 10px;
+    font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase;
+    font-weight: 700; border-radius: 2px;
+  }
+  .badge-new { background: var(--accent2); color: white; }
+  .badge-hot { background: var(--accent); color: white; }
+  .badge-sale { background: #16a34a; color: white; }
+  .badge-limited { background: var(--gold); color: white; }
+  .wishlist-btn {
+    position: absolute; top: 14px; right: 14px;
+    width: 34px; height: 34px;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem;
+    transition: all 0.2s;
+  }
+  .wishlist-btn:hover { transform: scale(1.1); }
+  .wishlist-btn.liked { background: #fee; border-color: #fcc; }
+  .product-info { padding: 1.2rem; flex: 1; display: flex; flex-direction: column; }
+  .product-brand {
+    font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gray); margin-bottom: 0.35rem;
+  }
+  .product-name {
+    font-weight: 600; font-size: 0.95rem;
+    margin-bottom: 0.25rem; line-height: 1.3;
+  }
+  .product-model { font-size: 0.8rem; color: var(--gray); margin-bottom: 0.75rem; }
+  .product-colors { display: flex; gap: 5px; margin-bottom: 1rem; }
+  .color-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .color-dot:hover { transform: scale(1.3); }
+  .product-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: auto;
+  }
+  .price { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 1px; }
+  .price-old { font-size: 0.85rem; color: var(--gray); text-decoration: line-through; margin-left: 6px; }
+  .add-cart-btn {
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 2px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .add-cart-btn:hover { background: var(--accent); }
+  .add-cart-btn.added { background: #16a34a; }
+
+  /* FEATURED BANNER */
+  .featured-banner {
+    background: var(--black);
+    margin: 0 5% 4rem;
+    border-radius: 4px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    min-height: 360px;
+    position: relative;
+  }
+  .featured-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(232,76,30,0.08), transparent);
+  }
+  .featured-text {
+    padding: 3.5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 2;
+  }
+  .featured-text .section-tag { margin-bottom: 0.75rem; }
+  .featured-text h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--white);
+    line-height: 0.9;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .featured-text h2 span { color: var(--accent); }
+  .featured-text p { color: rgba(245,243,238,0.5); max-width: 360px; font-size: 0.95rem; margin-bottom: 2rem; }
+  .featured-image {
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 1rem;
+    position: relative;
+  }
+  .featured-image img {
+    width: 90%; object-fit: contain;
+    filter: drop-shadow(0 10px 40px rgba(232,76,30,0.25));
+  }
+
+  /* BRANDS GRID */
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .brand-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 4px;
+    padding: 2rem 1rem;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-decoration: none;
+  }
+  .brand-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    border-color: var(--accent);
+  }
+  .brand-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: var(--black);
+  }
+  .brand-count { font-size: 0.75rem; color: var(--gray); }
+
+  /* REVIEWS */
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.2rem;
+  }
+  .review-card {
+    background: white;
+    border: 1px solid rgba(0,0,0,0.07);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .review-text { font-size: 0.9rem; line-height: 1.6; color: #333; margin-bottom: 1rem; }
+  .reviewer { display: flex; align-items: center; gap: 0.75rem; }
+  .reviewer-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--black);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700; color: white;
+  }
+  .reviewer-name { font-weight: 600; font-size: 0.85rem; }
+  .reviewer-location { font-size: 0.75rem; color: var(--gray); }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--black);
+    padding: 5rem;
+    text-align: center;
+    margin: 0 5% 5rem;
+    border-radius: 4px;
+  }
+  .newsletter h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+  .newsletter h2 span { color: var(--accent); }
+  .newsletter p { color: rgba(245,243,238,0.5); margin-bottom: 2rem; }
+  .newsletter-form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; }
+  .newsletter-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-right: none;
+    border-radius: 2px 0 0 2px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-form button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 0 2px 2px 0;
+    transition: background 0.2s;
+  }
+  .newsletter-form button:hover { background: #c73e14; }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: rgba(245,243,238,0.5);
+    padding: 3.5rem 5% 2rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand .logo { display: block; margin-bottom: 1rem; font-size: 1.8rem; }
+  .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
+  .footer-col h4 {
+    color: var(--white);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .footer-col ul a {
+    color: rgba(245,243,238,0.45);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--white); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* CART OVERLAY */
+  .cart-overlay {
+    position: fixed; inset: 0; z-index: 2000;
+    background: rgba(0,0,0,0.6);
+    display: none; align-items: flex-start; justify-content: flex-end;
+  }
+  .cart-overlay.open { display: flex; }
+  .cart-panel {
+    background: white;
+    width: 100%; max-width: 420px;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex; flex-direction: column;
+    animation: slideLeft 0.3s ease;
+  }
+  @keyframes slideLeft { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  .cart-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; background: white; z-index: 1;
+  }
+  .cart-header h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 1px; }
+  .close-cart {
+    background: none; border: none; font-size: 1.5rem; cursor: pointer; padding: 0.25rem;
+    color: var(--black); transition: opacity 0.2s;
+  }
+  .close-cart:hover { opacity: 0.5; }
+  .cart-items { flex: 1; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .cart-empty { text-align: center; color: var(--gray); padding: 4rem 0; }
+  .cart-empty-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .cart-item {
+    display: flex; gap: 1rem; padding: 1rem;
+    border: 1px solid rgba(0,0,0,0.07); border-radius: 4px;
+  }
+  .cart-item-img { width: 80px; height: 60px; object-fit: contain; background: var(--cream); border-radius: 4px; padding: 0.5rem; }
+  .cart-item-info { flex: 1; }
+  .cart-item-brand { font-size: 0.65rem; color: var(--gray); letter-spacing: 1px; text-transform: uppercase; }
+  .cart-item-name { font-weight: 600; font-size: 0.9rem; margin: 0.2rem 0; }
+  .cart-item-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: var(--accent); }
+  .cart-item-remove { background: none; border: none; color: var(--gray); cursor: pointer; font-size: 1.1rem; align-self: flex-start; }
+  .cart-footer {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    background: white;
+    position: sticky; bottom: 0;
+  }
+  .cart-total { display: flex; justify-content: space-between; font-weight: 700; font-size: 1rem; margin-bottom: 1rem; }
+  .cart-total span:last-child { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; }
+  .checkout-btn {
+    width: 100%;
+    background: var(--black);
+    color: white;
+    border: none;
+    padding: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+  .checkout-btn:hover { background: var(--accent); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    background: var(--black);
+    color: white;
+    padding: 0.9rem 2rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    z-index: 3000;
+    opacity: 0;
+    transition: all 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { min-height: 300px; padding: 2rem; }
+    .hero-stats { grid-template-columns: repeat(3, 1fr); }
+    .featured-banner { grid-template-columns: 1fr; }
+    .featured-image { min-height: 200px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .newsletter { padding: 3rem 2rem; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(255,255,255,0.1); border-bottom: none; border-radius: 2px 2px 0 0; }
+    .newsletter-form button { border-radius: 0 0 2px 2px; }
+  }
+  @media (max-width: 600px) {
+    .hero-stats { grid-template-columns: 1fr; }
+    .hero-text { padding: 2rem; }
+    .footer-grid { grid-template-columns: 1fr; }
+    section { padding: 3rem 4%; }
+    .featured-banner { margin: 0 4% 3rem; }
+    .newsletter { margin: 0 4% 4rem; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.6s ease both; }
+  .fade-up-1 { animation-delay: 0.1s; }
+  .fade-up-2 { animation-delay: 0.25s; }
+  .fade-up-3 { animation-delay: 0.4s; }
+  .fade-up-4 { animation-delay: 0.55s; }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#" class="logo">SOLE<span>.</span>DISTRICT</a>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#brands">Brands</a></li>
+    <li><a href="#featured">New Arrivals</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="cart-wrap">
+      <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cartCountNav">0</span>)</button>
+    </div>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge fade-up fade-up-1">New Collection 2025</div>
+    <h1 class="fade-up fade-up-2">STEP <em>BOLD.</em><br>RUN THE<br>STREETS.</h1>
+    <p class="fade-up fade-up-3">The world's top sneaker brands — Puma, Adidas, Nike, New Balance, and more — all in one store. Authentic. Fast shipping. Unbeatable prices.</p>
+    <div class="hero-btns fade-up fade-up-4">
+      <a href="#products" class="btn-primary">Shop Now</a>
+      <a href="#brands" class="btn-outline">Browse Brands</a>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img class="hero-shoe-img" src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_2000,h_2000/global/309048/01/sv01/fnd/IND/fmt/png/Suede-Classic-XXI-Sneakers" alt="Featured Sneaker" onerror="this.src='https://via.placeholder.com/500x400/f0ede6/0a0a0a?text=SNEAKER'">
+  </div>
+  <div class="hero-stats" style="grid-column: span 2;">
+    <div class="stat">
+      <div class="stat-num">500+</div>
+      <div class="stat-label">Styles</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">12+</div>
+      <div class="stat-label">Top Brands</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">48H</div>
+      <div class="stat-label">Delivery</div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS STRIP -->
+<div class="brands-strip">
+  <span class="strip-label">Official Brands</span>
+  <span class="brand-pill active" onclick="filterByBrand('All')">All</span>
+  <span class="brand-pill" onclick="filterByBrand('Nike')">Nike</span>
+  <span class="brand-pill" onclick="filterByBrand('Adidas')">Adidas</span>
+  <span class="brand-pill" onclick="filterByBrand('Puma')">Puma</span>
+  <span class="brand-pill" onclick="filterByBrand('New Balance')">New Balance</span>
+  <span class="brand-pill" onclick="filterByBrand('Reebok')">Reebok</span>
+  <span class="brand-pill" onclick="filterByBrand('Converse')">Converse</span>
+  <span class="brand-pill" onclick="filterByBrand('Vans')">Vans</span>
+  <span class="brand-pill" onclick="filterByBrand('Jordan')">Jordan</span>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products" style="background: var(--cream);">
+  <div class="section-head">
+    <div>
+      <div class="section-tag">Our Collection</div>
+      <h2 class="section-title">TRENDING NOW</h2>
+    </div>
+    <button class="view-all" onclick="showAll()">View All →</button>
+  </div>
+
+  <div class="filters" id="filterBtns">
+    <button class="filter-btn active" onclick="filterProducts('all', this)">All</button>
+    <button class="filter-btn" onclick="filterProducts('running', this)">Running</button>
+    <button class="filter-btn" onclick="filterProducts('lifestyle', this)">Lifestyle</button>
+    <button class="filter-btn" onclick="filterProducts('basketball', this)">Basketball</button>
+    <button class="filter-btn" onclick="filterProducts('training', this)">Training</button>
+  </div>
+
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<!-- FEATURED BANNER -->
+<div class="featured-banner" id="featured">
+  <div class="featured-text">
+    <div class="section-tag">Limited Drop</div>
+    <h2>ADIDAS<br><span>ULTRA</span><br>BOOST 25</h2>
+    <p>The most responsive running shoe ever made. Boost midsole technology returns 80% energy with every step. Now shipping to all of India.</p>
+    <button class="btn-primary" onclick="addToCartDirect('Adidas UltraBoost 25', 'Adidas', '₹14,999', 'https://brand.assets.adidas.com/image/upload/f_auto,q_auto/if_w_gt_800,w_800/corecontent/us/en/homepage/assets/SS22/ULTRABOOST_22_KEY_VISUAL_HOMEPAGE_HERO_D_tcm221-905506.jpg')">Add to Cart</button>
+  </div>
+  <div class="featured-image">
+    <img src="https://brand.assets.adidas.com/image/upload/f_auto,q_auto/if_w_gt_800,w_800/corecontent/us/en/homepage/assets/SS22/ULTRABOOST_22_KEY_VISUAL_HOMEPAGE_HERO_D_tcm221-905506.jpg" alt="Adidas UltraBoost 25" onerror="this.style.display='none'">
+  </div>
+</div>
+
+<!-- BRANDS -->
+<section id="brands" style="background: var(--cream);">
+  <div class="section-head">
+    <div>
+      <div class="section-tag">Official Partners</div>
+      <h2 class="section-title">SHOP BY BRAND</h2>
+    </div>
+  </div>
+  <div class="brands-grid">
+    <a class="brand-card" onclick="filterByBrand('Nike')">
+      <div class="brand-logo">NIKE</div>
+      <div class="brand-count">142 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Adidas')">
+      <div class="brand-logo">ADIDAS</div>
+      <div class="brand-count">128 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Puma')">
+      <div class="brand-logo">PUMA</div>
+      <div class="brand-count">96 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('New Balance')">
+      <div class="brand-logo">N.BALANCE</div>
+      <div class="brand-count">87 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Jordan')">
+      <div class="brand-logo">JORDAN</div>
+      <div class="brand-count">64 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Reebok')">
+      <div class="brand-logo">REEBOK</div>
+      <div class="brand-count">72 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Converse')">
+      <div class="brand-logo">CONVERSE</div>
+      <div class="brand-count">55 styles</div>
+    </a>
+    <a class="brand-card" onclick="filterByBrand('Vans')">
+      <div class="brand-logo">VANS</div>
+      <div class="brand-count">48 styles</div>
+    </a>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="background: white;">
+  <div class="section-head">
+    <div>
+      <div class="section-tag">What People Say</div>
+      <h2 class="section-title">CUSTOMER REVIEWS</h2>
+    </div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Got my Nike Air Max in just 2 days. Quality is 100% authentic and the price was way better than retail stores. Will definitely order again!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #1a1aff;">RK</div>
+        <div>
+          <div class="reviewer-name">Rahul Kumar</div>
+          <div class="reviewer-location">Mumbai, India</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"Finally a website where I can find all my favourite brands in one place. The Puma RS-X I ordered fits perfectly. Legit store!"</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: var(--accent);">PS</div>
+        <div>
+          <div class="reviewer-name">Priya Sharma</div>
+          <div class="reviewer-location">Bengaluru, India</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★☆</div>
+      <p class="review-text">"Amazing collection of Adidas and New Balance. The website is super easy to navigate. Packaging was really solid too."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: #16a34a;">AM</div>
+        <div>
+          <div class="reviewer-name">Arjun Mehta</div>
+          <div class="reviewer-location">Delhi, India</div>
+        </div>
+      </div>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="review-text">"I was skeptical at first but the Jordan 1 Retro I received is 100% authentic with box and everything. Great customer service too."</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar" style="background: var(--gold);">SC</div>
+        <div>
+          <div class="reviewer-name">Sneha Chakraborty</div>
+          <div class="reviewer-location">Kolkata, India</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <h2>DON'T MISS A <span>DROP.</span></h2>
+  <p>Subscribe to get notified about limited releases, exclusive deals, and new arrivals before anyone else.</p>
+  <div class="newsletter-form">
+    <input type="email" placeholder="Enter your email address" id="emailInput">
+    <button onclick="subscribeEmail()">Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="logo">SOLE<span style="color:var(--accent)">.</span>DISTRICT</a>
+      <p>India's premium destination for authentic sneakers from the world's top brands. Every pair guaranteed genuine.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#products">New Arrivals</a></li>
+        <li><a href="#products">Best Sellers</a></li>
+        <li><a href="#products">Sale</a></li>
+        <li><a href="#brands">All Brands</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Track Order</a></li>
+        <li><a href="#">Returns Policy</a></li>
+        <li><a href="#">Size Guide</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Sole District. All rights reserved.</span>
+    <span>Authentic products · Secure payments · Fast delivery across India</span>
+  </div>
+</footer>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCartOutside(event)">
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h3>YOUR CART</h3>
+      <button class="close-cart" onclick="toggleCart()">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <div class="cart-empty-icon">👟</div>
+        <p>Your cart is empty.<br>Start shopping!</p>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        <span>Total</span>
+        <span id="cartTotal">₹0</span>
+      </div>
+      <button class="checkout-btn" onclick="checkout()">Checkout Now →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+const products = [
+  { id:1, brand:'Nike', name:'Air Max 270', model:'React Edition', price:'₹12,495', priceNum:12495, oldPrice:'₹15,000', category:'lifestyle', badge:'hot', colors:['#000','#fff','#e84c1e'], img:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/skwgyqrbfzhu6fikgnte/air-max-270-shoes-2V5C4p.png' },
+  { id:2, brand:'Adidas', name:'Stan Smith', model:'Classic White', price:'₹7,999', priceNum:7999, oldPrice:null, category:'lifestyle', badge:'new', colors:['#fff','#0f0','#000'], img:'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/7ed0855435194229a525aad6009a0497_9366/Stan_Smith_Shoes_White_FX5502_01_standard.jpg' },
+  { id:3, brand:'Puma', name:'RS-X Toys', model:'Lifestyle Runners', price:'₹9,499', priceNum:9499, oldPrice:'₹11,000', category:'lifestyle', badge:'sale', colors:['#1a1aff','#e84c1e','#000'], img:'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/369449/01/sv01/fnd/IND/fmt/png/RS-X-Toys-Sneakers' },
+  { id:4, brand:'New Balance', name:'990v6', model:'Made in USA', price:'₹18,999', priceNum:18999, oldPrice:null, category:'running', badge:'limited', colors:['#888','#a0522d','#000'], img:'https://nb.scene7.com/is/image/NB/m990gl6_nb_02_i?$pdpflexf2$&qlt=70&fmt=webp&wid=440&hei=440' },
+  { id:5, brand:'Jordan', name:'Air Jordan 1 Retro', model:'High OG', price:'₹16,500', priceNum:16500, oldPrice:'₹19,000', category:'basketball', badge:'hot', colors:['#e84c1e','#000','#fff'], img:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/i1-665455a5-45de-40fb-945f-c1852b82400d/air-jordan-1-retro-high-og-shoes-G0YHB4.png' },
+  { id:6, brand:'Converse', name:'Chuck Taylor All Star', model:'High Top Canvas', price:'₹4,999', priceNum:4999, oldPrice:null, category:'lifestyle', badge:'new', colors:['#fff','#000','#e84c1e'], img:'https://www.converse.com/dw/image/v2/BCZC_PRD/on/demandware.static/-/Sites-cnv-master-catalog/default/dw1b5a5e4d/images/a_107/M9160_A_107X1.jpg?sw=600' },
+  { id:7, brand:'Reebok', name:'Classic Leather', model:'Legacy Edition', price:'₹6,499', priceNum:6499, oldPrice:'₹7,999', category:'lifestyle', badge:'sale', colors:['#fff','#888','#000'], img:'https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a7ef8ba1f77d4c3a8f74aede011244e3_9366/Classic_Leather_Shoes_White_49799_01_standard.jpg' },
+  { id:8, brand:'Vans', name:'Old Skool', model:'Core Classic', price:'₹5,299', priceNum:5299, oldPrice:null, category:'lifestyle', badge:'new', colors:['#000','#fff','#1a1aff'], img:'https://images.vans.com/is/image/Vans/VN000D3HY28-HERO?$PDP-HERO-IMAGE$' },
+  { id:9, brand:'Nike', name:'Air Force 1 \'07', model:'Low White', price:'₹8,695', priceNum:8695, oldPrice:null, category:'lifestyle', badge:'hot', colors:['#fff','#000','#c9a84c'], img:'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b7d9211d-1769-4f37-b423-317a419e9874/air-force-1-07-shoes-WrLlWX.png' },
+  { id:10, brand:'Adidas', name:'NMD_R1', model:'Primeknit', price:'₹11,999', priceNum:11999, oldPrice:'₹13,500', category:'running', badge:'sale', colors:['#e84c1e','#000','#fff'], img:'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/cbab47f9a0844a108a41ade900f5a9a3_9366/NMD_R1_Shoes_Black_GZ9256_01_standard.jpg' },
+  { id:11, brand:'Puma', name:'Suede Classic XXI', model:'Street Style', price:'₹7,499', priceNum:7499, oldPrice:null, category:'lifestyle', badge:'new', colors:['#0f0','#000','#888'], img:'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_600,h_600/global/309048/01/sv01/fnd/IND/fmt/png/Suede-Classic-XXI-Sneakers' },
+  { id:12, brand:'New Balance', name:'574', model:'Core Classic', price:'₹8,999', priceNum:8999, oldPrice:'₹10,500', category:'training', badge:'sale', colors:['#888','#000','#1a1aff'], img:'https://nb.scene7.com/is/image/NB/ml574evg_nb_02_i?$pdpflexf2$&qlt=70&fmt=webp&wid=440&hei=440' },
+];
+
+let cart = [];
+let activeFilter = 'all';
+let activeBrand = 'All';
+
+function renderProducts(list) {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = list.map(p => `
+    <div class="product-card" data-category="${p.category}" data-brand="${p.brand}">
+      <div class="product-img-wrap">
+        <img class="product-img" src="${p.img}" alt="${p.brand} ${p.name}" onerror="this.src='https://via.placeholder.com/400x300/f0ede6/0a0a0a?text=${encodeURIComponent(p.brand)}'">
+        ${p.badge ? `<span class="product-badge badge-${p.badge}">${p.badge.toUpperCase()}</span>` : ''}
+        <button class="wishlist-btn" onclick="toggleWishlist(this)" aria-label="Add to wishlist">♡</button>
+      </div>
+      <div class="product-info">
+        <div class="product-brand">${p.brand}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-model">${p.model}</div>
+        <div class="product-colors">
+          ${p.colors.map(c => `<div class="color-dot" style="background:${c}" title="Color option"></div>`).join('')}
+        </div>
+        <div class="product-footer">
+          <div>
+            <span class="price">${p.price}</span>
+            ${p.oldPrice ? `<span class="price-old">${p.oldPrice}</span>` : ''}
+          </div>
+          <button class="add-cart-btn" onclick="addToCart(${p.id}, this)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterProducts(cat, btn) {
+  activeFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function filterByBrand(brand) {
+  activeBrand = brand;
+  document.querySelectorAll('.brand-pill').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === brand || (brand === 'All' && b.textContent.trim() === 'All'));
+  });
+  applyFilters();
+  document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+}
+
+function applyFilters() {
+  let filtered = products;
+  if (activeFilter !== 'all') filtered = filtered.filter(p => p.category === activeFilter);
+  if (activeBrand !== 'All') filtered = filtered.filter(p => p.brand === activeBrand);
+  renderProducts(filtered);
+}
+
+function showAll() {
+  activeFilter = 'all';
+  activeBrand = 'All';
+  document.querySelectorAll('.filter-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+  renderProducts(products);
+}
+
+function addToCart(id, btn) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  cart.push({ ...p, cartId: Date.now() });
+  btn.textContent = '✓ Added';
+  btn.classList.add('added');
+  setTimeout(() => { btn.textContent = 'Add to Cart'; btn.classList.remove('added'); }, 1500);
+  updateCartUI();
+  showToast(`${p.brand} ${p.name} added to cart!`);
+}
+
+function addToCartDirect(name, brand, price, img) {
+  cart.push({ name, brand, price, img, cartId: Date.now() });
+  updateCartUI();
+  showToast(`${name} added to cart!`);
+}
+
+function removeFromCart(cartId) {
+  cart = cart.filter(c => c.cartId !== cartId);
+  updateCartUI();
+  renderCart();
+}
+
+function updateCartUI() {
+  const count = cart.length;
+  document.getElementById('cartCountNav').textContent = count;
+  renderCart();
+}
+
+function renderCart() {
+  const items = document.getElementById('cartItems');
+  const footer = document.getElementById('cartFooter');
+  if (cart.length === 0) {
+    items.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">👟</div><p>Your cart is empty.<br>Start shopping!</p></div>';
+    footer.style.display = 'none';
+    return;
+  }
+  footer.style.display = 'block';
+  items.innerHTML = cart.map(c => `
+    <div class="cart-item">
+      <img class="cart-item-img" src="${c.img || ''}" alt="${c.name}" onerror="this.src='https://via.placeholder.com/80x60/f0ede6/0a0a0a?text=SHOE'">
+      <div class="cart-item-info">
+        <div class="cart-item-brand">${c.brand}</div>
+        <div class="cart-item-name">${c.name}</div>
+        <div class="cart-item-price">${c.price}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${c.cartId})">✕</button>
+    </div>
+  `).join('');
+  const total = cart.reduce((sum, c) => sum + (c.priceNum || parseInt((c.price || '0').replace(/[^\d]/g,''))), 0);
+  document.getElementById('cartTotal').textContent = '₹' + total.toLocaleString('en-IN');
+}
+
+function toggleCart() {
+  document.getElementById('cartOverlay').classList.toggle('open');
+}
+
+function closeCartOutside(e) {
+  if (e.target === document.getElementById('cartOverlay')) toggleCart();
+}
+
+function toggleWishlist(btn) {
+  btn.classList.toggle('liked');
+  btn.textContent = btn.classList.contains('liked') ? '♥' : '♡';
+  if (btn.classList.contains('liked')) showToast('Added to wishlist!');
+}
+
+function checkout() {
+  showToast('🎉 Order placed! Thank you for shopping with Sole District!');
+  cart = [];
+  updateCartUI();
+  toggleCart();
+}
+
+function subscribeEmail() {
+  const email = document.getElementById('emailInput').value;
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email address.'); return; }
+  showToast(`✓ Subscribed! You're on the list, ${email}`);
+  document.getElementById('emailInput').value = '';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  if (!links) return;
+  if (links.style.display === 'flex') {
+    links.style.display = 'none';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(10,10,10,0.98);padding:1.5rem 5%;gap:1rem;z-index:999;';
+  }
+}
+
+renderProducts(products);
+</script>
+</body>
+</html>
